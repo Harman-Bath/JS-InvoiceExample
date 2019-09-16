@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Assignment 4</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type ="text/javascript">
+
+            var output1 = 0;
+            var output2 = 0;
+            var output3 = 0;
+            var beforeTax = 0;
+            var taxAmount = 0;
+            var finalAmount = 0;
+
+            function Total() {
+                var quantity1 = document.forms["form1"]["quantity1"].value;
+                var quantity2 = document.forms["form1"]["quantity2"].value;
+                var quantity3 = document.forms["form1"]["quantity3"].value;
+
+                output1 = quantity1 * 25;
+                document.forms["form1"]["amount1"].value = output1.toFixed(2);
+                output2 = quantity2 * 47;
+                document.forms["form1"]["amount2"].value = output2.toFixed(2);
+                output3 = quantity3 * 15.50;
+                document.forms["form1"]["amount3"].value = output3.toFixed(2);
+            }
+            function Buy() {
+
+                beforeTax = output1 + output2 + output3;
+                taxAmount = beforeTax * 0.13;
+                finalAmount = beforeTax + taxAmount;
+
+                document.getElementById("body").innerHTML += "Total: $" + beforeTax.toFixed(2) + "<br> Tax: $" +
+                        taxAmount.toFixed(2) + "<br> TOTAL AFTER TAX: $" + finalAmount.toFixed(2);
+            }
+
+            function magnify() {
+                document.getElementById("table1").style = "font-size: 20px; font-weight: bold; \n\
+    color: blue;";
+            }
+
+            function normal() {
+                document.getElementById("table1").style = "font-weight: normal;";
+            }
+
+            function magnify2() {
+                document.getElementById("body").style = "font-size: 20px; font-weight: bold; \n\
+    color: blue;";
+            }
+
+            function normal2() {
+                document.getElementById("body").style = "font-weight: normal;";
+            }
+        </script>            
+        <style>
+            #mainForm{
+                width: 60%;
+                border-style: solid; 
+                border-color: black; 
+            }
+            th{
+                border-width: 2px; 
+                border-style: solid;
+                border-color: red;
+            }
+            body{
+                background-color: lightblue; 
+            }
+
+            #body{
+                font-weight: bold; 
+            }
+        </style>
+    </head>
+    <body onload = "Total()">
+        <h1> Sales Invoice </h1>
+        <h2> Sales Details </h2>
+        <form name = "form1" id = "mainForm">
+            <table id = "table1" onmouseover="magnify()" onmouseout ="normal()">
+                <tr>
+                    <td>
+                        Username: 
+                    </td>
+                    <td>
+                        <?php
+                        echo get_current_user(); 
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Directory Pathname: 
+                    </td>
+                    <td>
+                        <?php
+                        echo getcwd(); 
+                        ?>
+                    </td>
+                </tr>
+                <tr id = one>
+                    <th>Quantity</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                </tr>
+                <tr id = two>
+                    <td> 
+                        <input type ="text" size ="5" name ="quantity1">
+                    </td>
+                    <td> Teddy Bear </td>
+                    <td> $25.00 </td>
+                    <td>
+                        <input type ="text" size ="8" name = "amount1"> 
+                    </td>
+                </tr>
+                <tr>
+                    <td> 
+                        <input type ="text" size ="5" name ="quantity2">
+                    </td>
+                    <td> Scooter </td>
+                    <td> $47.00 </td>
+                    <td>
+                        <input type ="text" size ="8" name = "amount2">
+                    </td>
+                </tr>
+                <tr>
+                    <td> 
+                        <input type ="text" size ="5" name ="quantity3">
+                    </td>
+                    <td> Frisby </td>
+                    <td> $15.50 </td>
+                    <td>
+                        <input type ="text" size ="8" name = "amount3">
+                    </td>
+                </tr>
+            </table><br><br>
+            <input type ="button" value ="Calculate" onclick ="Total()">
+            <input type ="button" value ="Purchase" onclick = "Buy()">
+            <input type ="reset">
+        </form><br><br>
+        <div id ="body" onmouseover="magnify2()" onmouseout ="normal2()">
+        </div>
+    </body>
+</html>
